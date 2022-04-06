@@ -79,7 +79,7 @@ ORDER BY COUNT DESC LIMIT 1;
 SELECT visits.vets_id, vets.name, animals.name, visits.date_of_visit FROM visits LEFT JOIN vets ON vets.vets_id = visits.vets_id
 JOIN animals ON animals.id = visits.animals_id WHERE vets.name = 'William Tatcher' ORDER BY date_of_visit DESC LIMIT 1;
 
-SELECT CONT(visits.vets_id) FROM visits JOIN vets.vets_id = visits.vets_id
+SELECT COUNT(visits.vets_id) FROM visits JOIN vets.vets_id = visits.vets_id
 JOIN animals ON animals.id = visits.animals_id WHERE vets.name = 'Stephanie Mendez';
 
 SELECT * FROM vets LEFT JOIN specializations ON specializations.vets_id = vets.vets_id
