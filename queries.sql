@@ -1,6 +1,6 @@
 /*Queries that provide answers to the questions from all projects.*/
 
-SELECT * FROM animals WHERE name like = '%mon';
+SELECT * FROM animals WHERE name like '%mon';
 SELECT * FROM animals WHERE extract(YEAR FROM date_of_birth) BETWEEN 2016 AND 2019;
 SELECT * FROM animals WHERE neutered = true AND escape_attempts < 3;
 SELECT date_of_birth AS "Date of Birth" FROM animals WHERE name = 'Agumon' OR name = 'Pikachu';
@@ -109,3 +109,9 @@ JOIN animals ON animals.id = visits.animals_id
 JOIN species ON species.id = animals.species_id
 WHERE vets.name = 'Maisy Smith'
 GROUP BY species.name; 
+
+EXPLAIN ANALYZE SELECT COUNT(*) FROM visits where animals_id = 4;
+
+EXPLAIN ANALYZE SELECT * FROM visits where vets_id = 2;
+
+EXPLAIN ANALYZE SELECT * FROM owners where email = 'owner_18327@mail.com';
