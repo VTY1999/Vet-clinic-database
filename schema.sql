@@ -33,7 +33,7 @@ ADD CONSTRAINT fk_species FOREIGN KEY (species_id) REFERENCES species(species_id
 ADD CONSTRAINT fk_owners FOREIGN KEY (owners_id) REFERENCES owners (owners_id) ON DELETE CASCADE;
 
 CREATE TABLE vets (
-    vets_id GENERATED ALWAYS AS IDENTITY,
+    vets_id INT GENERATED ALWAYS AS IDENTITY NOT NULL,
     name VARCHAR (100) NOT NULL,
     age INT,
     date_of_graduation DATE,
@@ -43,15 +43,22 @@ CREATE TABLE vets (
 CREATE TABLE specializations (
    species_id int,
     vets_id int,
-    CONSTRAINT fk_species FOREIGN KEY(species_id) REFERENCES species(id),
-    CONSTRAINT fk_vets FOREIGN KEY(vets_id) REFERENCES vets(id)
+    FOREIGN KEY (species_id) REFERENCES species (species_id),
+    FOREIGN KEY (vets_id) REFERENCES vets (vets_id)
    );
 
 CREATE TABLE visits (
     animals_id int,
     vets_id int,
     date_of_visit date,
-    CONSTRAINT fk_animals FOREIGN KEY(animals_id) REFERENCES animals(id),
-    CONSTRAINT fk_vets FOREIGN KEY(vets_id) REFERENCES vets(id)
+    FOREIGN KEY(animals_id) REFERENCES animals (id),
+    FOREIGN KEY(vets_id) REFERENCES vets (vets_id)
    );
+
+ALTER TABLE owners ADD COLUMN email VARCHAR(120);
    
+CREATE INDEX visits_animals_id_idx ON visits(animals_id);
+
+CREATE INDEX visits_vets_id_idx ON visits(vets_id);
+
+CREATE INDEX visits_owners_id_idx ON owners(email)
